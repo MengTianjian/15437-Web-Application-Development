@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <link href="/static/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="calcultor">
+      <div class="display">{{display}}</div>
+      <form method="post">
+        {% if display %}<input type="hidden" name="lastdisplay" value="{{display}}"/>{% endif %}
+        {% if digit %}<input type="hidden" name="lastdigit" value="{{digit}}"/>{% endif %}
+        {% if operator %}<input type="hidden" name="lastoperator" value="{{operator}}"/>{% endif %}
+        {% if lastinput %}<input type="hidden" name="lastinput" value="{{lastinput}}"/>{% endif %}
+        {% csrf_token %}
+        <table class="buttons">
+          <tbody>
+            <tr>
+              <td><button class="digit_button" name="digit" value="7">7</button></td>
+              <td><button class="digit_button" name="digit" value="8">8</button></td>
+              <td><button class="digit_button" name="digit" value="9">9</button></td>
+              <td><button class="operator_button" name="operator" value="+">&plus;</button></td>
+            </tr>
+            <tr>
+              <td><button class="digit_button" name="digit" value="4">4</button></td>
+              <td><button class="digit_button" name="digit" value="5">5</button></td>
+              <td><button class="digit_button" name="digit" value="6">6</button></td>
+              <td><button class="operator_button" name="operator" value="-">&#8211;</button></td>
+            </tr>
+            <tr>
+              <td><button class="digit_button" name="digit" value="1">1</button></td>
+              <td><button class="digit_button" name="digit" value="2">2</button></td>
+              <td><button class="digit_button" name="digit" value="3">3</button></td>
+              <td><button class="operator_button" name="operator" value="*">&times;</button></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><button class="digit_button" name="digit" value="0">0</button></td>
+              <td><button class="operator_button" name="operator" value="=">&equals;</button></td>
+              <td><button class="operator_button" name="operator" value="/">&divide;</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

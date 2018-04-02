@@ -1,0 +1,56 @@
+.calcultor {
+  margin: auto;
+  height: 275px;
+  width: 270px;
+  border: 2px solid grey;
+  border-radius: 5px;
+}
+.buttons {
+  margin: auto;
+}
+.buttons td {
+  height: 52px;
+  width: 60px;
+  text-align: center;
+}
+.display {
+  background-color: grey;
+  color: white;
+  text-align: right;
+  width: 270px;
+  height: 45px;
+  font-size: 40px;
+  margin-bottom: 2px;
+}
+.digit_button {
+  background-color: grey;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 30%;
+  border: 2px solid grey;
+  transition-duration: 0.2s;
+  outline: none;
+  font-size: 20px;
+}
+.digit_button:hover {
+  background-color: white;
+  color: black;
+}
+.operator_button {
+  background-color: orange;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 30%;
+  border: 2px solid orange;
+  transition-duration: 0.2s;
+  outline: none;
+  font-size: 20px;
+}
+.operator_button:hover {
+  background-color: white;
+  color: black;
+}
