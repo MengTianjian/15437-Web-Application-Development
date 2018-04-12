@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block sidebar-right %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{% url 'login' %}">Sign in</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<h3>{{ text }}</h3>
+{% endblock %}

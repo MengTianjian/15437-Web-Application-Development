@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block sidebar-left %}
+<ul class="nav navbar-nav">
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'followerstream' %}">Follower Stream</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+{% endblock %}
+{% block sidebar-right %}
+<ul class="nav navbar-nav navbar-right">
+  {% ifequal user.id userprofile.user.id %}
+  <li class="active"><a href="{% url 'profile' user.id %}">{{ user.username }}</a></li>
+  {% else %}
+  <li><a href="{% url 'profile' user.id %}">{{ user.username }}</a></li>
+  {% endifequal %}
+  <li><a href="{% url 'logout' %}">Log out</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="Profile">
+  <img class="ProfilePhoto" alt="" src="{% url 'profile-photo' userprofile.user.id %}">
+  <div class="ProfileInfo">
+    <h1>{{ userprofile.user.username }}</h1>
+    <h3>{{ userprofile.firstname }} {{ userprofile.lastname }}</h3>
+    <h4>Email: {{ userprofile.email }}</h4>
+    <h5>Age: {{ userprofile.age }}</h5>
+    <h5>Bio: {{ userprofile.bio }}</h5>
+  </div>
+</div>
+<form class="form-edit" enctype="multipart/form-data" method="post" action="{% url 'edit_profile' %}">
+  {% for field in form.visible_fields %}
+    {{ field }}
+  {% endfor %}
+  {% csrf_token %}
+  <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+</form>
+<div class="Link">
+  <a href="{% url 'change_password' %}">Reset password</a>
+</div>
+{% endblock %}

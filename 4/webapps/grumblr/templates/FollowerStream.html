@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block sidebar-left %}
+<ul class="nav navbar-nav">
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li class="active"><a href="{% url 'followerstream' %}">Follower Stream</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<form class="form-post" enctype="multipart/form-data" method="post" action="{% url 'post' %}">
+  <!--label class="btn btn-default btn-file" style="margin-bottom: 10px;">
+      Photo <input type="file" style="display: none; margin-bottom: 10px;">
+  </label-->
+  {% for field in form.visible_fields %}
+    {{ field }}
+  {% endfor %}
+  {% csrf_token %}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Post</button>
+</form>
+
+{% for post in posts %}
+<div class="panel panel-default">
+  {% ifnotequal user post.user %}
+    <form method="post" action="{% url 'unfollow' %}">
+      <input type="hidden" name="id" value="{{ post.user.id }}" />
+      <button class="btn btn-secondary" type="submit">unfollow</button>
+      {% csrf_token %}
+    </form>
+  {% endifnotequal %}
+  <a href="{% url 'profile' post.user.id %}">
+    <img class="UserProfilePhoto" alt="" src="{% url 'profile-photo' post.user.id %}">
+  </a>
+  <div class="panel-body">
+    <div class="col-6 col-sm-9 placeholder">
+      <a href="{% url 'profile' post.user.id %}">
+        <h3 class="UserName">{{ post.user.username }}</h3>
+      </a>
+      <div class="PostTime">
+        <h5>{{ post.time }}</h5>
+      </div>
+    </div>
+    <div>
+      <h4 class="PostText">{{ post.text }}</h4>
+      {% if post.image %}
+      <img class="PostImage" alt="" src="{% url 'post-photo' post.id %}">
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
